@@ -1,10 +1,10 @@
 $(document).ready(function () {
     console.log("ready!");
 
-    $("body").on("click","#uploadImg",function(event){
+    $("body").on("click", "#uploadImg", function (event) {
         event.preventDefault();
         $("#uploadImg").html("Processing Photo...");
-        $("#uploadImg").attr("disabled","disabled");
+        $("#uploadImg").attr("disabled", "disabled");
         console.log("Did I make it in here?")
         processImage();
     })
@@ -88,7 +88,8 @@ function processResults(dataObj) {
     console.log("Am i in processing DAta?");
     let data = dataObj[0]['faceAttributes'];
     console.log(data);
-    
+
+
     // convert to clean object 
     var data2 = JSON.parse(JSON.stringify(dataObj, null, 2));
 
@@ -96,7 +97,7 @@ function processResults(dataObj) {
     console.log(data2.length);
 
     if (data2.length > 1) {
-        $("#imgResultsMsg").html("There are "+data2.length+" faces detected.   Need your help.  Can you upload a photo with just one image?");
+        $("#imgResultsMsg").html("There are " + data2.length + " faces detected.   Need your help.  Can you upload a photo with just one image?");
     } else if (data2.length < 1) {
         $("#imgResultsMsg").html("Help!  Can't find any images.. ");
     }
@@ -125,14 +126,130 @@ function processResults(dataObj) {
     $("#imgFacialHair").html(facialHairResultsString);
 
 
-    $("#imgEmotion1").html(data["emotion"]);
-    $("#imgEmotion2").html(data["emotion"]);
-    $("#imgMakeUp").html(data["makeup"]);
+    // get highest emotion from list of emotions
+    var maxChar = "";
+    var maxCharValue = 0.0;
+    console.log(data['emotion']);
+    for (charKey in data['emotion']) {
+        if (data['emotion'][charKey] > maxCharValue) {
+            maxChar = charKey;
+            maxCharValue = data['emotion'][charKey];
+        }
+    }
+
+    $("#imgEmotion1").html(maxChar);
+    // $("#imgEmotion2").html(data["emotion"]);
+
+    var makeupString = "";
+    for (key in data['makeup']) {
+        if (data['makeup'][key]) {
+            makeupString = makeupString + key + "";
+        }
+    }
+
+    $("#imgMakeUp").html(makeupString);
     $("#imgAccessories").html(data["accessories"]);
     $("#imgHair").html(data["hair"]);
-   
-    
+
+    // call moveAPI based on maxChar 
+    generateMovieList(maxChar);
+
+    // unlock button
+    $("#uploadImg").html("Upload");
+    $("#uploadImg").removeAttr("disabled");
 }
+
+
+function generateMovieList(emotionChar) {
+    console.log("Did i make it to generateMoveList?");
+    var emotions = {
+        anger: { genre: "War", ID: 10752 },
+        contempt: { genre: "Adventure", ID: 12 },
+        disgust: { genre: "Horror", ID: 27 },
+        fear: { genre: "Horror", ID: 27 },
+        happiness: { genre: "Comedy", ID: 35 },
+        neutral: { genre: "Animation", ID: 16 },
+        sadness: { genre: "Drama", ID: 18 },
+        surprise: { genre: "Science Fiction", ID: 878 },
+
+    }
+
+    var uriBase = "https://api.themoviedb.org/3/discover/movie";
+    var apikey = "56b80906dca0b429c04477c6b950ad7f";
+    var genreID = emotions[emotionChar]['ID'];
+
+
+    // Request parameters.
+    var params = {
+        api_key: apikey,
+        language: "en-US",
+        sort_by: "popularity.desc",
+        include_adult: false,
+        include_video: false,
+        page: 1,
+        with_genres: genreID,
+    }
+
+    // Perform the REST API call.
+    $.ajax({
+        url: uriBase + '?' + $.param(params),
+        type: 'GET',
+    })
+        .done(function (data) {
+            console.log("output of AJAX", data);
+            // Show formatted JSON on webpage.
+            // $('#responseTextArea').val(JSON.stringify(data, null, 2));
+            console.log("in ajax movietb: ", data['results']);
+            renderPosters(data['results']);
+        })
+
+        .fail(function (jqXHR, textStatus, errorThrown) {
+            // Display error message.
+            var errorString =
+                errorThrown === ''
+                    ? 'Error. '
+                    : errorThrown + ' (' + jqXHR.status + '): '
+            errorString +=
+                jqXHR.responseText === ''
+                    ? ''
+                    : jQuery.parseJSON(jqXHR.responseText).message
+                        ? jQuery.parseJSON(jqXHR.responseText).message
+                        : jQuery.parseJSON(jqXHR.responseText).error.message
+            alert(errorString)
+        })
+}
+
+
+
+function renderPosters (movielist) {
+   
+    var baseURL = "https://image.tmdb.org/t/p/";
+    var imageSize = "w300";
+    console.log("in function renderPosters", movielist);
+
+    var posterURLArray = [];
+
+
+    // create URL Array
+    for (let i = 0; i < movielist.length; i++) {
+        console.log(movielist[i]['poster_path']);
+        var posterPath = movielist[i]['poster_path'];
+        var fullPath = baseURL+imageSize + posterPath;
+        posterURLArray.push(fullPath);
+    }
+
+    console.log(posterURLArray);
+
+    // print pictures to DIV movielist
+    for (let i = 0; i<posterURLArray.length; i++) {
+        var imageTag = $("<img>");
+        imageTag.attr("src",posterURLArray[i]);
+        imageTag.attr("alt","somethingOutOFcourtesy");
+        $("#movieList").append(imageTag);
+    }
+
+}
+
 
 
 /*  raw data example fro brian.jpg
@@ -292,4 +409,40 @@ function processResults(dataObj) {
     }
 ]
 }
+*/
+
+//  for movie posters
+//  var imgBase_url =  "http://image.tmdb.org/t/p/";
+//  var imgSize = "w300";
+//   var output 
+/*
+
+{
+    "images": {
+        "base_url": "http://image.tmdb.org/t/p/",
+        "secure_base_url": "https://image.tmdb.org/t/p/",
+        "backdrop_sizes": [
+            "w300",
+            "w780",
+            "w1280",
+            "original"
+        ],
+        "logo_sizes": [
+            "w45",
+            "w92",
+            "w154",
+            "w185",
+            "w300",
+            "w500",
+            "original"
+        ],
+        "poster_sizes": [
+            "w92",
+            "w154",
+            "w185",
+            "w342",
+            "w500",
+            "w780",
+            "original"
+
 */
