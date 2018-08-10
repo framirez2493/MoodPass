@@ -11,6 +11,24 @@ $(document).ready(function () {
 
 });
 
+//https://stackoverflow.com/questions/4459379/preview-an-image-before-it-is-uploaded
+// function to preview image
+function readURL(input) {
+
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#previewImg').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+$("#fileToUpload").change(function () {
+    readURL(this);
+});
 
 function processImage() {
     //taken straight from their webPage 
@@ -175,14 +193,14 @@ function processResults(dataObj) {
     var hairString = "";
     if (data['hair']['bald'] > 0.5) {
         hairString = "bald";
-    // let's see if invisible
+        // let's see if invisible
     } else if (data['hair']['invisible']) {
         hairString = "invisible";
-    // let's find the color
+        // let's find the color
     } else {
         // analyzie hair color results
         let colorMax = 0.0;
-        for (let i=0; i<data['hair']['hairColor'].length; i++) {
+        for (let i = 0; i < data['hair']['hairColor'].length; i++) {
             if (data['hair']['hairColor'][i]['confidence'] > colorMax) {
                 hairString = data['hair']['hairColor'][i]['color'];
                 colorMax = data['hair']['hairColor'][i]['confidence'];
@@ -264,8 +282,8 @@ function generateMovieList(emotionChar) {
 
 
 
-function renderPosters (movielist) {
-   
+function renderPosters(movielist) {
+
     var baseURL = "https://image.tmdb.org/t/p/";
     var imageSize = "w300";
     console.log("in function renderPosters", movielist);
@@ -277,17 +295,17 @@ function renderPosters (movielist) {
     for (let i = 0; i < movielist.length; i++) {
         console.log(movielist[i]['poster_path']);
         var posterPath = movielist[i]['poster_path'];
-        var fullPath = baseURL+imageSize + posterPath;
+        var fullPath = baseURL + imageSize + posterPath;
         posterURLArray.push(fullPath);
     }
 
     console.log(posterURLArray);
 
     // print pictures to DIV movielist
-    for (let i = 0; i<posterURLArray.length; i++) {
+    for (let i = 0; i < posterURLArray.length; i++) {
         var imageTag = $("<img>");
-        imageTag.attr("src",posterURLArray[i]);
-        imageTag.attr("alt","somethingOutOFcourtesy");
+        imageTag.attr("src", posterURLArray[i]);
+        imageTag.attr("alt", "somethingOutOFcourtesy");
         $("#movieList").append(imageTag);
     }
 
