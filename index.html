@@ -51,9 +51,9 @@
   <div class="container">
     <div id="1">
       <br>
-      <h1>Testing: Below is the upload information</h1>
+      <h1>Upload Your Face Here:</h1>
       <hr>
-      <h3>Choose and Submit Your Image File Here:</h3>
+      <h3>Please Choose and Submit Your Image File:</h3>
     </div>
 
     <form id="form1" method="post">
@@ -74,56 +74,13 @@
       <div id="progressNumber"></div>
     </form>
     <hr>
-    <h3>Here is the JSON response</h3>
-    <div id="wrapper" style="width:1020px; display:table;">
-      <div id="jsonOutput" style="width:600px; display:table-cell;">
-        Response:
-        <br>
-        <br>
-        <textarea id="responseTextArea" class="UIInput" style="width:580px; height:200px;"></textarea>
-      </div>
-    </div>
-    <div id="faceAttributes">
-      <h4 id="imgResultsMsg"></h4>
-      <div>Smile:
-        <span id="imgSmile"></span>
-      </div>
-      <div>Gender:
-        <span id="imgGender"></span>
-      </div>
-      <div>Age:
-        <span id="imgAge"></span>
-      </div>
-      <div>Facial Hair:
-        <span id="imgFacialHair"></span>
-      </div>
-      <div>Glasses:
-        <span id="imgGlasses"></span>
-      </div>
-      <div>Emotion1:
-        <span id="imgEmotion1"></span>
-      </div>
-      <div>Emotion2:
-        <span id="imgEmotion2"></span>
-      </div>
-      <div>Makeup:
-        <span id="imgMakeUp"></span>
-      </div>
-      <div>Accessories:
-        <span id="imgAccessories"></span>
-      </div>
-      <div>Hair:
-        <span id="imgHair"></span>
-      </div>
-    </div>
-
-    <hr>
-    <h3>Here is the movie List</h3>
+    
+    <h3>Your Movie Recommendations:</h3>
     <div id="movieList">
-      
-    </div>
 
-    <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      
+      <!-- Modal -->
+      <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -133,7 +90,7 @@
               </button>
             </div>
             <div class="modal-body">
-                <h4 id="imgResultsMsg"></h4>
+              ...
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -159,99 +116,3 @@
 </body>
 
 </html>
-
-
-<!--
-
-<div>
-<div id="faceAttributes">
-    <div>Smile:<span id="imgSmile"></span></div>
-    <div>Gender:<span id="imgGender"></span></div>
-    <div>Age:<span id="imgAge"></span></div>
-    <div>Hair:<span id="imgFacialHair"></span></div>
-    <div>Glasses:<span id="imgGlasses"></span></div>
-    <div>Emotion1:<span id="imgEmotion1"></span></div>
-    <div>Emotion2:<span id="imgEmotion2"></span></div>
-    <div>Makeup:<span id="imgMakeUp"></span></div>
-    <div>Accessories:<span id="imgAccessories"></span></div>
-    <div>Hair:<span id="imgHair"></span></div>
-</div>
-
-
-</div>
-
-[
-  {
-    "faceId": "360278a2-34c8-44ca-a0e0-60d7976c9435",
-    "faceRectangle": {
-      "top": 635,
-      "left": 236,
-      "width": 1151,
-      "height": 1151
-    },
-    "faceAttributes": {
-      "smile": 0.524,
-      "gender": "male",
-      "age": 65,
-      "facialHair": {
-        "moustache": 0.6,
-        "beard": 0.6,
-        "sideburns": 0.1
-      },
-      "glasses": "ReadingGlasses",
-      "emotion": {
-        "anger": 0,
-        "contempt": 0.001,
-        "disgust": 0,
-        "fear": 0,
-        "happiness": 0.524,
-        "neutral": 0.475,
-        "sadness": 0,
-        "surprise": 0
-      },
-      "makeup": {
-        "eyeMakeup": false,
-        "lipMakeup": false
-      },
-      "accessories": [
-        {
-          "type": "glasses",
-          "confidence": 0.94
-        }
-      ],
-      "hair": {
-        "bald": 0.08,
-        "invisible": false,
-        "hairColor": [
-          {
-            "color": "gray",
-            "confidence": 0.98
-          },
-          {
-            "color": "blond",
-            "confidence": 0.72
-          },
-          {
-            "color": "brown",
-            "confidence": 0.46
-          },
-          {
-            "color": "black",
-            "confidence": 0.38
-          },
-          {
-            "color": "other",
-            "confidence": 0.32
-          },
-          {
-            "color": "red",
-            "confidence": 0.03
-
-
-
-
-
-
-
-
-    -->
