@@ -99,11 +99,13 @@ function processResults(dataObj) {
     if (data2.length > 1) {
         let imageError = "There are " + data2.length + " faces detected.   Need your help.  Can you upload a photo with just one image?";
         $("#imgResultsMsg").html(imageError);
-        alert("This should be a bootstrap module in the endstate. "+imageError);
+        $("#errorModal").modal("show");
+        // alert("This should be a bootstrap module in the endstate. "+imageError);
     } else if (data2.length < 1) {
         let imageError = "Help!  Can't find any images.. ";
         $("#imgResultsMsg").html(imageError);
-        alert("This should be a bootstrap module in the endstate. "+imageError);
+        $("#errorModal").modal("show");
+        // alert("This should be a bootstrap module in the endstate. "+imageError);
     }
 
 
