@@ -9,6 +9,11 @@ $(document).ready(function () {
         processImage();
     })
 
+    // initailize modal for materialcss
+    $('.modal').modal();
+
+
+
 });
 
 //https://stackoverflow.com/questions/4459379/preview-an-image-before-it-is-uploaded
@@ -20,6 +25,7 @@ function readURL(input) {
 
         reader.onload = function (e) {
             $('#previewImg').attr('src', e.target.result);
+            $('.previewImg').attr('src', e.target.result);
         }
 
         reader.readAsDataURL(input.files[0]);
@@ -101,11 +107,18 @@ function processImage() {
         })
 }
 
+// https://stackoverflow.com/questions/8579643/how-to-scroll-up-or-down-the-page-to-an-anchor-using-jquery
+function scrollToAnchor(aid) {
+    var aTag = $("a[name='" + aid + "']");
+    $('html,body').animate({ scrollTop: aTag.offset().top }, 'slow');
+}
+
 
 function processResults(dataObj) {
     console.log("Am i in processing DAta?");
-    let data = dataObj[0]['faceAttributes'];
-    console.log(data);
+    console.log(dataObj);
+
+
 
 
     // convert to clean object 
@@ -115,108 +128,121 @@ function processResults(dataObj) {
     console.log(data2.length);
 
     if (data2.length > 1) {
-        let imageError = "There are " + data2.length + " faces detected.   Need your help.  Can you upload a photo with just one image?";
-        $("#imgResultsMsg").html(imageError);
-        $("#errorModal").modal("show");
+        let imageError = "There are " + data2.length + " faces detected.   Forrest didn't give me enough time to analyze more than one face.   Can you upload a photo with just one face?";
+        $(".imgResultsMsg").html(imageError);
+        $("#errorModal").modal("open");  // material uses modal("open"), bootstrap uses modal("show")
         // alert("This should be a bootstrap module in the endstate. "+imageError);
     } else if (data2.length < 1) {
-        let imageError = "Help!  Can't find any images.. ";
-        $("#imgResultsMsg").html(imageError);
-        $("#errorModal").modal("show");
+        let imageError = "Sorry.  Whatever you uploaded doesn't look like a human face. I am not yet smart enough to handle non-human faces. Can you try another photo with just one face? ";
+        $(".imgResultsMsg").html(imageError);
+        $("#errorModal").modal("open");  // material uses modal("open"), bootstrap uses modal("show")
         // alert("This should be a bootstrap module in the endstate. "+imageError);
     }
 
 
-    // replace data directly
-    $("#imgSmile").html(data["smile"]);
-    $("#imgGender").html(data["gender"]);
-    $("#imgAge").html(data["age"]);
-    $("#imgGlasses").html(data["glasses"]);
+    if (data2.length === 1) {
+        let data = dataObj[0]['faceAttributes'];
 
-    // now handle the nested data
-    // process facial hair
-    let facialHairResults = [];
-    let facialHairResultsString = "";
+        // replace data directly for the easy stuff
+        $("#imgGender").html(data["gender"]);
+        $("#imgAge").html(data["age"]);
+        $("#imgGlasses").html(data["glasses"]);
 
-    // if confidence value for property > 0.5, then add property to string
-    for (property in data["facialHair"]) {
-        if (data['facialHair'][property] > 0.5) {
-            facialHairResults.push(property);
-            // push into string for display
-            facialHairResultsString = facialHairResultsString + property + " ";
-        }
-    }
-
-    // if not facial hair, then print out None
-    if (facialHairResultsString === "") {
-        facialHairResults = "None";
-    }
-
-    console.log("facial hair results: ", facialHairResults);
-    $("#imgFacialHair").html(facialHairResultsString);
-
-
-    // get highest emotion from list of emotions
-    var maxChar = "";
-    var maxCharValue = 0.0;
-    console.log(data['emotion']);
-    for (charKey in data['emotion']) {
-        if (data['emotion'][charKey] > maxCharValue) {
-            maxChar = charKey;
-            maxCharValue = data['emotion'][charKey];
-        }
-    }
-
-    $("#imgEmotion1").html(maxChar);
-    // $("#imgEmotion2").html(data["emotion"]);
-
-    // let's check for makeup
-    var makeupString = "";
-    for (key in data['makeup']) {
-
-        // if value is true then add to string
-        if (data['makeup'][key]) {
-            makeupString = makeupString + key + "";
-        }
-    }
-
-    // if no makeup printout None
-    if (makeupString === "") {
-        makeupString = "None";
-    }
-
-    $("#imgMakeUp").html(makeupString);
-    // $("#imgAccessories").html(data["accessories"]);
-
-
-    // let's see if bald,
-    var hairString = "";
-    if (data['hair']['bald'] > 0.5) {
-        hairString = "bald";
-        // let's see if invisible
-    } else if (data['hair']['invisible']) {
-        hairString = "invisible";
-        // let's find the color
-    } else {
-        // analyzie hair color results
-        let colorMax = 0.0;
-        for (let i = 0; i < data['hair']['hairColor'].length; i++) {
-            if (data['hair']['hairColor'][i]['confidence'] > colorMax) {
-                hairString = data['hair']['hairColor'][i]['color'];
-                colorMax = data['hair']['hairColor'][i]['confidence'];
+        // is he smiling?
+        var imgSmiling = "No";
+        if (data['smile'] > 0.5) {
+            imgSmiling = "Yes";
+            if (data['smile'] < 0.6) {
+                imgSmiling += ", but barely"
             }
         }
+        $("#imgSmile").html(imgSmiling);
+
+        // now handle the nested data
+        // process facial hair
+        let facialHairResults = [];
+        let facialHairResultsString = "";
+
+        // if confidence value for property > 0.5, then add property to string
+        for (property in data["facialHair"]) {
+            if (data['facialHair'][property] > 0.5) {
+                facialHairResults.push(property);
+                // push into string for display
+                facialHairResultsString = facialHairResultsString + property + " ";
+            }
+        }
+
+        // if not facial hair, then print out None
+        if (facialHairResultsString === "") {
+            facialHairResults = "None";
+        }
+
+        console.log("facial hair results: ", facialHairResults);
+        $("#imgFacialHair").html(facialHairResultsString);
+
+
+        // get highest emotion from list of emotions
+        var maxChar = "";
+        var maxCharValue = 0.0;
+        console.log(data['emotion']);
+        for (charKey in data['emotion']) {
+            if (data['emotion'][charKey] > maxCharValue) {
+                maxChar = charKey;
+                maxCharValue = data['emotion'][charKey];
+            }
+        }
+
+        $("#imgEmotion1").html(maxChar);
+        // $("#imgEmotion2").html(data["emotion"]);
+
+        // let's check for makeup
+        var makeupString = "";
+        for (key in data['makeup']) {
+
+            // if value is true then add to string
+            if (data['makeup'][key]) {
+                makeupString = makeupString + key + "";
+            }
+        }
+
+        // if no makeup printout None
+        if (makeupString === "") {
+            makeupString = "None";
+        }
+
+        $("#imgMakeUp").html(makeupString);
+        // $("#imgAccessories").html(data["accessories"]);
+
+
+        // let's see if bald,
+        var hairString = "";
+        if (data['hair']['bald'] > 0.5) {
+            hairString = "bald";
+            // let's see if invisible
+        } else if (data['hair']['invisible']) {
+            hairString = "invisible";
+            // let's find the color
+        } else {
+            // analyzie hair color results
+            let colorMax = 0.0;
+            for (let i = 0; i < data['hair']['hairColor'].length; i++) {
+                if (data['hair']['hairColor'][i]['confidence'] > colorMax) {
+                    hairString = data['hair']['hairColor'][i]['color'];
+                    colorMax = data['hair']['hairColor'][i]['confidence'];
+                }
+            }
+        }
+
+        $("#imgHair").html(hairString);
+
+        // scroll to specs Page
+        scrollToAnchor("specsPage");
+
+        // call moveAPI based on maxChar 
+        generateMovieList(maxChar);
     }
-
-
-
-    $("#imgHair").html(hairString);
-
-    // call moveAPI based on maxChar 
-    generateMovieList(maxChar);
-
     // unlock button
-    $("#uploadImg").html("Upload");
+    $("#uploadImg").html("Analyze this Face");
     $("#uploadImg").removeAttr("disabled");
 }
 
@@ -303,11 +329,20 @@ function renderPosters(movielist) {
 
     // print pictures to DIV movielist
     for (let i = 0; i < posterURLArray.length; i++) {
+        var anchorTag = $("<a>");
+        anchorTag.addClass("carousel-item");
+
         var imageTag = $("<img>");
         imageTag.attr("src", posterURLArray[i]);
         imageTag.attr("alt", "somethingOutOFcourtesy");
-        $("#movieList").append(imageTag);
+
+        anchorTag.append(imageTag);
+        $("#movieList").append(anchorTag);
+        console.log("appended?", anchorTag);
     }
+
+    // initialize carousel for materialcss
+    $('.carousel').carousel();
 
 }
 
