@@ -97,9 +97,13 @@ function processResults(dataObj) {
     console.log(data2.length);
 
     if (data2.length > 1) {
-        $("#imgResultsMsg").html("There are " + data2.length + " faces detected.   Need your help.  Can you upload a photo with just one image?");
+        let imageError = "There are " + data2.length + " faces detected.   Need your help.  Can you upload a photo with just one image?";
+        $("#imgResultsMsg").html(imageError);
+        alert("This should be a bootstrap module in the endstate. "+imageError);
     } else if (data2.length < 1) {
-        $("#imgResultsMsg").html("Help!  Can't find any images.. ");
+        let imageError = "Help!  Can't find any images.. ";
+        $("#imgResultsMsg").html(imageError);
+        alert("This should be a bootstrap module in the endstate. "+imageError);
     }
 
 
@@ -114,7 +118,7 @@ function processResults(dataObj) {
     let facialHairResults = [];
     let facialHairResultsString = "";
 
-    // if odds are > 0.5, then facial hair is likely
+    // if confidence value for property > 0.5, then add property to string
     for (property in data["facialHair"]) {
         if (data['facialHair'][property] > 0.5) {
             facialHairResults.push(property);
@@ -122,6 +126,12 @@ function processResults(dataObj) {
             facialHairResultsString = facialHairResultsString + property + " ";
         }
     }
+
+    // if not facial hair, then print out None
+    if (facialHairResultsString === "") {
+        facialHairResults = "None";
+    }
+
     console.log("facial hair results: ", facialHairResults);
     $("#imgFacialHair").html(facialHairResultsString);
 
@@ -140,16 +150,47 @@ function processResults(dataObj) {
     $("#imgEmotion1").html(maxChar);
     // $("#imgEmotion2").html(data["emotion"]);
 
+    // let's check for makeup
     var makeupString = "";
     for (key in data['makeup']) {
+
+        // if value is true then add to string
         if (data['makeup'][key]) {
             makeupString = makeupString + key + "";
         }
     }
 
+    // if no makeup printout None
+    if (makeupString === "") {
+        makeupString = "None";
+    }
+
     $("#imgMakeUp").html(makeupString);
-    $("#imgAccessories").html(data["accessories"]);
-    $("#imgHair").html(data["hair"]);
+    // $("#imgAccessories").html(data["accessories"]);
+
+
+    // let's see if bald,
+    var hairString = "";
+    if (data['hair']['bald'] > 0.5) {
+        hairString = "bald";
+    // let's see if invisible
+    } else if (data['hair']['invisible']) {
+        hairString = "invisible";
+    // let's find the color
+    } else {
+        // analyzie hair color results
+        let colorMax = 0.0;
+        for (let i=0; i<data['hair']['hairColor'].length; i++) {
+            if (data['hair']['hairColor'][i]['confidence'] > colorMax) {
+                hairString = data['hair']['hairColor'][i]['color'];
+                colorMax = data['hair']['hairColor'][i]['confidence'];
+            }
+        }
+    }
+
+
+
+    $("#imgHair").html(hairString);
 
     // call moveAPI based on maxChar 
     generateMovieList(maxChar);
