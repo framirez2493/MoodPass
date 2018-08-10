@@ -1,0 +1,10 @@
+.fullPage {
+    height: 100vh;
+}
+
+.emphasizeEmotion {
+    font-size: 1.2em;
+    display: block;
+    padding-left: 3px;
+    border: 2px solid lightgray;
+}
