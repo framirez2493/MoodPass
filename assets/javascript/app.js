@@ -133,7 +133,7 @@ function processResults(dataObj) {
         $("#errorModal").modal("open");  // material uses modal("open"), bootstrap uses modal("show")
         // alert("This should be a bootstrap module in the endstate. "+imageError);
     } else if (data2.length < 1) {
-        let imageError = "Sorry.  Whatever you uploaded doesn't look like a human face. I am not yet smart enough to handle non-human faces. Can you try another photo with just one face? ";
+        let imageError = " sorry I am not yet smart enough to analyze this image. Can you try another photo with one face? ";
         $(".imgResultsMsg").html(imageError);
         $("#errorModal").modal("open");  // material uses modal("open"), bootstrap uses modal("show")
         // alert("This should be a bootstrap module in the endstate. "+imageError);
