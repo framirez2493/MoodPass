@@ -1,15 +1,21 @@
-.fullPage {
+.section {
     height: 100vh;
 }
-
 .emphasizeEmotion {
     font-size: 1.2em;
-    display: block;
+    border-width:50px;
     padding-left: 3px;
-    border: 2px solid lightgray;
+    border: 2px solid #000000;
 }
 
-  
+.row .col{
+    padding: 0 !important;
+}
+
+.cardmood {
+height: auto;
+margin: 0;
+}
 
 .container {
     text-align: center;
@@ -29,6 +35,11 @@
     padding-top: 4rem;
     height:auto;
 
+}
+
+.previewImg {
+    max-height:80vh;
+    width: auto;
 }
 
 #start-button {
@@ -52,7 +63,8 @@
     text-align: center;
     color:white;
     margin-bottom: 50px;
-    margin-right:45;
+    margin-top:50px;
+    margin-right:45%;
     margin-left:45%;
 }
 
@@ -133,14 +145,4 @@ i.large {
 
 input, textarea {
     border-bottom: 1px solid #fff;
-}
-
-
-
-.parallax-container {
-    max-height: 400px;
-}
-
-footer.page-footer {
-    margin-top: 0px !important;
 }
