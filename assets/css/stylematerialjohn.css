@@ -13,7 +13,7 @@
 }
 
 .cardmood {
-height: auto;
+height: 90vh;
 margin: 0;
 }
 
@@ -38,7 +38,7 @@ margin: 0;
 }
 
 .previewImg {
-    max-height:80vh;
+    max-height:50vh;
     width: auto;
 }
 
