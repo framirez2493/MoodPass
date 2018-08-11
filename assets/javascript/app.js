@@ -40,7 +40,7 @@ function processImage() {
     //taken straight from their webPage 
 
     // Replace <Subscription Key> with your valid subscription key.
-    var subscriptionKey = '164e073488bf42d2a0694495201728e1'
+    var subscriptionKey = '8eddf66d67b34b99979cf8d9b0c7959d';
 
     // NOTE: You must use the same region in your REST call as you used to
     // obtain your subscription keys. For example, if you obtained your
