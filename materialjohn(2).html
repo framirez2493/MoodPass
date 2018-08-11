@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Mood Pass: Movies For Your Mood!</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+    <!--Material-->
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+
+    <!--Google Fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+    <!--FontAwesome-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!--CSS Style Sheets-->
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/stylematerialjohn.css" />
+
+    <!--Materialize Icons-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+</head>
+
+
+<body>
+    <div class="container">
+        <div class="col s12 m9 l10">
+            <div class=i d="Introduction" class="section scrollspy">
+                <br>
+
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <a href="#" name="uploadPage"></a>
+    <div id="uploadPage" class="section scrollspy">
+        <div class="row valign-wrapper">
+            <div class="col row z-depth-2 s12 offset-s-1 valign">
+                <div class="card red darken-1">
+                    <div class="card-content white-text">
+                        <span class="card-title"></span>
+                        <h3>Upload Your Image:</h3>
+                        <form id="form1" method="post">
+                            <div class="row">
+                                <br>
+                                <input type="file" name="fileToUpload" id="fileToUpload" />
+                            </div>
+                            <div id="fileName"></div>
+                            <div id="fileSize"></div>
+                            <div id="fileType"></div>
+
+                            <br>
+
+                            <div class="row z-depth-4 waves-effect waves-light btn-large black" button id="uploadImg" class="btn" value="Upload">Analyze the Face</button>
+                            </div>
+                            <div id="progressNumber"></div>
+                            <!-- tag of where the preview image  -->
+                            <img class="responsive-img" id="previewImg">
+                        </form>
+                    </div>
+                    <!-- 
+                                <div class="card-action">
+                                    <a href="#specsPage">link to full face analytics page</a>
+                                </div>
+                                 -->
+                </div>
+            </div>
+
+             <!-- non-slim Jquery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <!-- Material-->
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+    <!-- app js -->
+    <script src="assets/javascript/app.js"></script>
+</body>
