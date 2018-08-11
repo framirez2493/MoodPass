@@ -342,7 +342,8 @@ function renderPosters(movielist) {
     }
 
     // initialize carousel for materialcss
-    $('.carousel').carousel();
+    $('#cascade-slider').cascadeSlider();
+
 
 }
 
