@@ -2,125 +2,205 @@
 <html>
 
 <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-  <title>Mood Pass: Movies For Your Mood!</title>
+    <title>Mood Pass: Movies For Your Mood!</title>
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!--CSS Style Sheets-->
-  <link rel="stylesheet" type="text/css" media="screen" href="assets/css/reset.css" />
-  <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
 
-  <!--Bootstrap-->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-    crossorigin="anonymous">
 
-  <!--Google Fonts-->
-  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <!--Material-->
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
 
-  <!--FontAwesome-->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--Google Fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+    <!--FontAwesome-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!--CSS Style Sheets-->
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/stylematerialjohn.css" />
+
+    <!--Materialize Icons-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 </head>
-<!--Body of website-->
+
+<!--Hero-->
+<div class="section no-pad-bot" id="index-banner" style="height:100vh; background-size: cover; background-image: url(https://www.xmple.com/wallpaper/pink-linear-red-gradient-1920x1080-c2-db7093-ff0000-a-30-f-14.svg);">"
+    <div class="container">
+        <h1 class="text_h center header cd-headline letters type">
+            <span>Mood</span>
+                <b class="is-visible">Pass</b>  
+                <h3>Movies Recommended For Your Mood!
+                    <br> See the magic happen....</h3>
+                    <br>
+                    <a class="z-depth-5 waves-effect waves-light btn-large black" id="start-button" href="#uploadPage">Click here to Start!</a>
+                </div>
+            </span>
+        </h1>
+        <!-- <a href="#"></a>
+        <i class="large material-icons">arrow_downward</i>
+        </a> -->
+    </div>
+</div>
 
 <body>
-  <section class="pt-5 pb-5 mt-0 align-items-center d-flex bg-dark" style="height:100vh; background-size: cover; background-image: url(https://www.xmple.com/wallpaper/pink-linear-red-gradient-1920x1080-c2-db7093-ff0000-a-30-f-14.svg);">
+    <a href="#" name="uploadPage"></a>
+    <div id="uploadPage" class="section">
+        <div class="row valign-wrapper">
+            <div class="col z-depth-3  s12 offset-s-1 valign">
+                <div class="card red darken-1 cardmood">
+                    <div class="card-content white-text">
+                        <span class="card-title"></span>
+                        <h3>Upload Face Image:</h3>
+                        <form id="form1" method="post">
+                            <div class="row">
+                                <br>
+                                <input type="file" name="fileToUpload" id="fileToUpload" />
+                            </div>
+                            <div id="fileName"></div>
+                            <div id="fileSize"></div>
+                            <!-- <div id="fileType"></div> -->
+                            <br>
+                            <br>
+                            <div class="row z-depth-4 waves-effect waves-light btn-large black" button id="uploadImg" class="btn" value="Upload">Analyze the Face</button>
+                            </div>
+                            <div id="progressNumber"></div>
+                            <!-- tag of where the preview image  -->
+                            <img class="responsive-img previewImg">
+                        </form>
+                    </div>
+                    <!-- 
+                                <div class="card-action">
+                                    <a href="#specsPage">link to full face analytics page</a>
+                                </div>
+                                 -->
+                </div>
+            </div>
 
-    <div class="container-fluid">
-      <div class="row  justify-content-center align-items-center d-flex text-center h-100">
-        <div class="col-12 col-md-8  h-50 ">
-          <h1 class="display-2  text-dark mb-2 mt-5">
-            <strong>Mood Pass</strong>
-          </h1>
-          <h2 class="lead  text-dark mb-5">Easy As 1, 2, 3....
-            <br> Movies Recommended Based On Your Mood!</h2>
-
-          <div class="btn-container-wrapper p-relative d-block  zindex-1">
-            <a class="btn btn-link btn-lg   mt-md-3 mb-4 scroll align-self-center text-light bounce" href="#1">
-              <i class="fa fa-angle-down fa-4x text-light"></i>
-            </a>
-          </div>
         </div>
-
-      </div>
-    </div>
-  </section>
-  <div class="container">
-    <div id="1">
-      <br>
-      <h1>Testing: Below is the upload information</h1>
-      <hr>
-      <h3>Choose and Submit Your Image File Here:</h3>
     </div>
 
-    <form id="form1" method="post">
-      <div class="row">
-        <br />
 
-        <input type="file" name="fileToUpload" id="fileToUpload" />
-      </div>
-      <div id="fileName"></div>
-      <div id="fileSize"></div>
-      <div id="fileType"></div>
+    <a href="#" name="specsPage"></a>
+    <div id="specsPage" class="section">
+        <div class="row valign-wrapper">
 
-      <br>
+            <div class="col z-depth-3 s12 offset-s-1 valign">
+                <div class="card red darken-1 cardmood">
+                    <div class="card-content white-text">
+                        <h3 style="text-align:center;">Face Analysis:</h3>
+                        <!-- tag of where the preview image  -->
+                        <div class="row">
+                            <br>
+                            <div class="col s6">
+                                <img class="responsive-img previewImg">
+                            </div>
+                            <div class="col s6">
+                                <div>Smile:
+                                    <span id="imgSmile"></span>
+                                </div>
+                                <div>Gender:
+                                    <span id="imgGender"></span>
+                                </div>
+                                <div>Age:
+                                    <span id="imgAge"></span>
+                                </div>
+                                <div>Facial Hair:
+                                    <span id="imgFacialHair"></span>
+                                </div>
+                                <div>Glasses:
+                                    <span id="imgGlasses"></span>
+                                </div>
+                                <div>
+                                    <span class="emphasizeEmotion"> Emotion:
+                                        <span id="imgEmotion1"></span>
+                                    </span>
+                                </div>
+                                <div>Makeup:
+                                    <span id="imgMakeUp"></span>
+                                </div>
 
-      <div class="row">
-        <button id="uploadImg" class="btn btn-primary" value="Upload" />UPLOAD YOUR FACE</button>
-      </div>
-      <div id="progressNumber"></div>
-    </form>
-    <hr>
-
-    <h3>Here is the movie List</h3>
-    <div id="movieList">
-        <div><img src="assets/images/poster1.jpg" alt="movie"></div>
-        <div><img src="assets/images/poster2.jpg" alt="movie"></div>
-        <div><img src="assets/images/poster3.jpg" alt="movie"></div>
-        <div><img src="assets/images/poster4.jpg" alt="movie"></div>
-        <div><img src="assets/images/poster5.jpg" alt="movie"></div>
-        <div><img src="assets/images/poster6.jpg" alt="movie"></div>
-        
-      
-    </div>
-
-    <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+                                <div>Hair:
+                                    <span id="imgHair"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <h4>Was Our Analysis Close?</h4>
+                        </div>
+                    </div>
+                    <div class="z-depth-4 waves-effect waves-light btn-large black" id="movie-link-btn">
+                        <a href="#moviePage">View Movie Recommendations</a>
+                    </div>
+                </div>
             </div>
-            <div class="modal-body">
-                <h4 class="imgResultsMsg"></h4>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-          </div>
         </div>
-      </div>
-
     </div>
 
-  </div>
 
-  <!-- non-slim Jquery -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-  <!-- bootstrap -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-    crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-    crossorigin="anonymous"></script>
-  <!-- app js -->
-  <script src="assets/javascript/app.js"></script>
+
+    <a href="#" name="moviePage"></a>
+    <div id="moviePage" class="section">
+        <div class="row valign-wrapper">
+            <div class="col z-depth-3  s12 offset-s-1 valign">
+                <div class="card red darken-1 cardmood">
+                    <div class="card-content white-text">
+                        <h3>Movie Suggestion Page</h3>
+
+                        <div id="movieList" class="carousel">
+                            <!-- 
+                                        <a class="carousel-item" href="">
+                                            <img src="https://lorempixel.com/250/250/nature/1">
+                                        </a>
+                                        <a class="carousel-item" href="">
+                                            <img src="https://lorempixel.com/250/250/nature/2">
+                                        </a>
+                                        <a class="carousel-item" href="">
+                                            <img src="https://lorempixel.com/250/250/nature/3">
+                                        </a>
+                                        <a class="carousel-item" href="">
+                                            <img src="https://lorempixel.com/250/250/nature/4">
+                                        </a>
+                                        <a class="carousel-item" href="">
+                                            <img src="https://lorempixel.com/250/250/nature/5">
+                                        </a>
+                                         -->
+
+                        </div>
+                        <div class="z-depth-4 waves-effect waves-light btn-large black" id="another-image-btn">
+                            <a href="#uploadPage">Lets Analyze Another Face</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+
+    <!-- Modal Structure -->
+
+    <div id="errorModal" class="modal">
+        <div class="modal-content">
+            <h4>Help! We are confused</h4>
+            <p class="imgResultsMsg"></p>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-black btn-flat">Agree</a>
+        </div>
+    </div>
+    </div>
+
+    <!-- non-slim Jquery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <!-- Material-->
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+    <!-- app js -->
+    <script src="assets/javascript/app.js"></script>
 </body>
-
-</html>
-
-
