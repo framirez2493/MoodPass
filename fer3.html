@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    
+    <!--Material-->
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+
+    <!--Google Fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+    <!--FontAwesome-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!--CSS Style Sheets-->
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/f.css" />
+
+    <!--Materialize Icons-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+</head>
+<body>
+        <a href="#" name="uploadPage"></a>
+        <div id="uploadPage" class="section">
+            <div class="row valign-wrapper">
+                <div class="col z-depth-3  s12 offset-s-1 valign">
+                    <div class="card red darken-1 cardmood">
+                        <div class="card-content white-text">
+                            <span class="card-title"></span>
+                            <h3>Upload Face Image:</h3>
+                            <form id="form1" method="post">
+                                <div class="row">
+                                    <br>
+                                    <input type="file" name="fileToUpload" id="fileToUpload" />
+                                    
+                                </div>
+                                <!-- <div id="fileType"></div> -->
+                                <img class="responsive-img previewImg">
+                                <br>
+                                <div class="row z-depth-4 waves-effect waves-light btn-large black" button id="uploadImg" class="btn" value="Upload">Analyze the Face</button>
+                                </div>
+                                
+                                <!-- tag of where the preview image  -->
+                                
+                            </form>
+                        </div>
+                        <!-- 
+                                    <div class="card-action">
+                                        <a href="#specsPage">link to full face analytics page</a>
+                                    </div>
+                                     -->
+                    </div>
+                </div>
+        
+            </div>
+        </div>
+        
+
+
+        <a href="#" name="specsPage"></a>
+        <div id="specsPage" class="section">
+            <div class="row valign-wrapper">
+    
+                <div class="col z-depth-3 s12 offset-s-1 valign">
+                    <div class="card red darken-1 cardmood">
+                        <div class="card-content white-text">
+                            <h3 style="text-align:center;">Face Analysis:</h3>
+                            <!-- tag of where the preview image  -->
+                            <div class="row">
+                                <br>
+                                <div class="col s6">
+                                    <img class="responsive-img previewImg">
+                                </div>
+                                <div class="col s6">
+                                    <div>Smile:
+                                        <span id="imgSmile"></span>
+                                    </div>
+                                    <div>Gender:
+                                        <span id="imgGender"></span>
+                                    </div>
+                                    <div>Age:
+                                        <span id="imgAge"></span>
+                                    </div>
+                                    <div>Facial Hair:
+                                        <span id="imgFacialHair"></span>
+                                    </div>
+                                    <div>Glasses:
+                                        <span id="imgGlasses"></span>
+                                    </div>
+                                    <div>
+                                        <span class="emphasizeEmotion"> Emotion:
+                                            <span id="imgEmotion1"></span>
+                                        </span>
+                                    </div>
+                                    <div>Makeup:
+                                        <span id="imgMakeUp"></span>
+                                    </div>
+    
+                                    <div>Hair:
+                                        <span id="imgHair"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" id="movep">
+                                <h4>Was Our Analysis Close?</h4>
+                                <div class="z-depth-4 waves-effect waves-light btn-large black" id="movie-link-btn">
+                                        <a href="#moviePage">View Movie Recommendations</a>
+                                    </div>
+                            </div>
+                        </div>
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    
+    
+        <a href="#" name="moviePage"></a>
+        <div id="moviePage" class="section">
+            <div class="row valign-wrapper">
+                <div class="col z-depth-3  s12 offset-s-1 valign">
+                    <div class="card red darken-1 cardmood">
+                            <span><h3 style= "color:white">Movie Suggestion Page</h3>
+                            </span>
+                            <div id="movieList" class="carousel"></div>
+                                    <div class="z-depth-4 waves-effect waves-light btn-large black" id="another-image-btn">
+                                            <a href="#uploadPage">Lets Analyze Another Face</a>
+                                        </div>
+                       
+                            
+    
+                               
+    
+                           
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+    
+    
+    
+        <!-- Modal Structure -->
+    
+        <div id="errorModal" class="modal">
+            <div class="modal-content">
+                <h4>Help! We are confused</h4>
+                <p class="imgResultsMsg"></p>
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class="modal-close waves-effect waves-black btn-flat">Agree</a>
+            </div>
+        </div>
+        </div>
+    
+        <!-- non-slim Jquery -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+        <!-- Material-->
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+        <!-- app js -->
+        <script src="assets/javascript/app.js"></script>
+    </body>
+    
+
+</html>
